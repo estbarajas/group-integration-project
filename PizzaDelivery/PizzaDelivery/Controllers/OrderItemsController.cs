@@ -51,8 +51,8 @@ namespace PizzaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ItemId")] OrderItem orderItem)
         {
-
             Order order = new Order();
+            order.UserId = User.Identity.GetUserId();
 
             if (ModelState.IsValid)
             {

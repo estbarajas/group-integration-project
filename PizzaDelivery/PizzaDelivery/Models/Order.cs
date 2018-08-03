@@ -21,5 +21,5 @@ namespace PizzaDelivery.Models
         public int? MenuId { get; set; }
         public Menu Menu { get; set; }
 
-    
+    }
 }

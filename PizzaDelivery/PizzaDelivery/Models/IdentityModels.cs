@@ -29,5 +29,12 @@ namespace PizzaDelivery.Models
         {
             return new ApplicationDbContext();
         }
+
+        DbSet<Manager> Managers { get; set; }
+        DbSet<Customer> Customers { get; set; }
+        DbSet<Employee> Employees { get; set; }
+        DbSet<Item> Items { get; set; }
+        DbSet<Menu> Menus { get; set; }
+        DbSet<Order> Orders { get; set; }
     }
 }

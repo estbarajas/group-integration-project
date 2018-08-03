@@ -36,5 +36,17 @@ namespace PizzaDelivery.Models
         DbSet<Item> Items { get; set; }
         DbSet<Menu> Menus { get; set; }
         DbSet<Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Customer> Customers { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Order> Orders { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Employee> Employees { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Item> Items { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Manager> Managers { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.Menu> Menus { get; set; }
     }
 }

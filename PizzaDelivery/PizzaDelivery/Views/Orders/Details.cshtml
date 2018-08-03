@@ -1,0 +1,58 @@
+﻿@model PizzaDelivery.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Menu.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Menu.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderPrepped)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderPrepped)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderOutForDelivery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderOutForDelivery)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

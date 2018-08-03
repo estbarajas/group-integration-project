@@ -10,17 +10,17 @@ namespace PizzaDelivery.Models
     public class Employee
     {
         [Key]
-        
+
         public int Id { get; set; }
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        [Display (Name ="Last Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-       
+
 
         [ForeignKey("Order")]
-        [Display(Name ="Order Id")]
-        public int? OrderId { get; set; }
+        [Display(Name = "Order Id")]
+        public int OrderId { get; set; }
         public Order Order { get; set; }
 
         [ForeignKey("User")]

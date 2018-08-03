@@ -12,17 +12,13 @@ namespace PizzaDelivery.Models
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("Item")]
+        public int? ItemId { get; set; }
+        public Item Item { get; set; }
 
-
-        [ForeignKey("Order")]
-        public int? OrderId { get; set; }
-        public Order Order { get; set; }
-
-
-
-        [ForeignKey("Customer")]
-        public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        //[ForeignKey("Order")]
+        //public int? OrderId { get; set; }
+        //public Order Order { get; set; }
 
 
     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PizzaDelivery.Models;
 
 namespace PizzaDelivery.Controllers
@@ -17,7 +18,7 @@ namespace PizzaDelivery.Controllers
         // GET: OrderItems
         public ActionResult Index()
         {
-            var orderItems = db.OrderItems.Include(o => o.Customer).Include(o => o.Order);
+            var orderItems = db.OrderItems.Include(o => o.Item);
             return View(orderItems.ToList());
         }
 
@@ -39,8 +40,7 @@ namespace PizzaDelivery.Controllers
         // GET: OrderItems/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id");
+            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name");
             return View();
         }
 
@@ -49,8 +49,11 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,OrderId,CustomerId")] OrderItem orderItem)
+        public ActionResult Create([Bind(Include = "Id,ItemId")] OrderItem orderItem)
         {
+
+            Order order = new Order();
+
             if (ModelState.IsValid)
             {
                 db.OrderItems.Add(orderItem);
@@ -58,8 +61,7 @@ namespace PizzaDelivery.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", orderItem.ItemId);
             return View(orderItem);
         }
 
@@ -75,8 +77,7 @@ namespace PizzaDelivery.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", orderItem.ItemId);
             return View(orderItem);
         }
 
@@ -85,7 +86,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,OrderId,CustomerId")] OrderItem orderItem)
+        public ActionResult Edit([Bind(Include = "Id,ItemId")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +94,7 @@ namespace PizzaDelivery.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
-            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", orderItem.ItemId);
             return View(orderItem);
         }
 

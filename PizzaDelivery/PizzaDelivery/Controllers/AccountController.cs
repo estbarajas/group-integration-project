@@ -173,7 +173,7 @@ namespace PizzaDelivery.Controllers
                     }
                     if (model.UserRole == "Manager")
                     {
-                        return RedirectToAction("Create", "Manager");
+                        return RedirectToAction("Create", "Managers");
                     }
                 return RedirectToAction("Index", "Home");
                 }

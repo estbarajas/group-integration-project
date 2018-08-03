@@ -21,5 +21,8 @@ namespace PizzaDelivery.Models
         public int? OrderId { get; set; }
         public Order Order { get; set; }
 
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

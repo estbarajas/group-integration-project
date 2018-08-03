@@ -215,6 +215,10 @@
     <Compile Include="Migrations\201808031520437_secondMigration.Designer.cs">
       <DependentUpon>201808031520437_secondMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808031531321_thirdMigration.cs" />
+    <Compile Include="Migrations\201808031531321_thirdMigration.Designer.cs">
+      <DependentUpon>201808031531321_thirdMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -317,6 +321,8 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Shared\ManagerView.cshtml" />
+    <Content Include="Views\Shared\EmployeeLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -340,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808031520437_secondMigration.resx">
       <DependentUpon>201808031520437_secondMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808031531321_thirdMigration.resx">
+      <DependentUpon>201808031531321_thirdMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

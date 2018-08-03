@@ -17,9 +17,6 @@ namespace PizzaDelivery.Models
         public bool OrderPrepped { get; set; }
         public bool OrderOutForDelivery { get; set; }
 
-        [ForeignKey("Menu")]
-        public int? MenuId { get; set; }
-        public Menu Menu { get; set; }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PizzaDelivery.Models.Menu>
+﻿@model IEnumerable<PizzaDelivery.Models.OrderItem>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Item.Name)
+            @Html.DisplayNameFor(model => model.Customer.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.Id)
         </th>
         <th></th>
     </tr>
@@ -20,7 +23,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Item.Name)
+            @Html.DisplayFor(modelItem => item.Customer.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Order.Id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

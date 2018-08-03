@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Menu.Id)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Total)
         </th>
         <th>
@@ -31,9 +28,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Menu.Id)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Total)
         </td>

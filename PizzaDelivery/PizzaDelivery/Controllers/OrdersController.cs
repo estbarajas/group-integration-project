@@ -17,8 +17,7 @@ namespace PizzaDelivery.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Menu);
-            return View(orders.ToList());
+            return View(db.Orders.ToList());
         }
 
         // GET: Orders/Details/5
@@ -39,7 +38,6 @@ namespace PizzaDelivery.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.MenuId = new SelectList(db.Menus, "Id", "Id");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery,MenuId")] Order order)
+        public ActionResult Create([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace PizzaDelivery.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MenuId = new SelectList(db.Menus, "Id", "Id", order.MenuId);
             return View(order);
         }
 
@@ -73,7 +70,6 @@ namespace PizzaDelivery.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MenuId = new SelectList(db.Menus, "Id", "Id", order.MenuId);
             return View(order);
         }
 
@@ -82,7 +78,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery,MenuId")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace PizzaDelivery.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MenuId = new SelectList(db.Menus, "Id", "Id", order.MenuId);
             return View(order);
         }
 

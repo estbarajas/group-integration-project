@@ -10,112 +10,116 @@ using PizzaDelivery.Models;
 
 namespace PizzaDelivery.Controllers
 {
-    public class MenusController : Controller
+    public class OrderItemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Menus
+        // GET: OrderItems
         public ActionResult Index()
         {
-            var menus = db.Menus.Include(m => m.Item);
-            return View(menus.ToList());
+            var orderItems = db.OrderItems.Include(o => o.Customer).Include(o => o.Order);
+            return View(orderItems.ToList());
         }
 
-        // GET: Menus/Details/5
+        // GET: OrderItems/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            OrderItem orderItem = db.OrderItems.Find(id);
+            if (orderItem == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(orderItem);
         }
 
-        // GET: Menus/Create
+        // GET: OrderItems/Create
         public ActionResult Create()
         {
-            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name");
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id");
             return View();
         }
 
-        // POST: Menus/Create
+        // POST: OrderItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ItemId")] Menu menu)
+        public ActionResult Create([Bind(Include = "Id,OrderId,CustomerId")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
             {
-                db.Menus.Add(menu);
+                db.OrderItems.Add(orderItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", menu.ItemId);
-            return View(menu);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            return View(orderItem);
         }
 
-        // GET: Menus/Edit/5
+        // GET: OrderItems/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            OrderItem orderItem = db.OrderItems.Find(id);
+            if (orderItem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", menu.ItemId);
-            return View(menu);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            return View(orderItem);
         }
 
-        // POST: Menus/Edit/5
+        // POST: OrderItems/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ItemId")] Menu menu)
+        public ActionResult Edit([Bind(Include = "Id,OrderId,CustomerId")] OrderItem orderItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(menu).State = EntityState.Modified;
+                db.Entry(orderItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", menu.ItemId);
-            return View(menu);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", orderItem.CustomerId);
+            ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", orderItem.OrderId);
+            return View(orderItem);
         }
 
-        // GET: Menus/Delete/5
+        // GET: OrderItems/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Menu menu = db.Menus.Find(id);
-            if (menu == null)
+            OrderItem orderItem = db.OrderItems.Find(id);
+            if (orderItem == null)
             {
                 return HttpNotFound();
             }
-            return View(menu);
+            return View(orderItem);
         }
 
-        // POST: Menus/Delete/5
+        // POST: OrderItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Menu menu = db.Menus.Find(id);
-            db.Menus.Remove(menu);
+            OrderItem orderItem = db.OrderItems.Find(id);
+            db.OrderItems.Remove(orderItem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

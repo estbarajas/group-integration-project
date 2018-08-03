@@ -35,9 +35,8 @@ namespace PizzaDelivery.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<Menu> Menus { get; set; }
         public DbSet<Order> Orders { get; set; }
-
+        public DbSet<OrderItem> OrderItems { get; set; }
        
     }
 }

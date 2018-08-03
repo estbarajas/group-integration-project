@@ -15,7 +15,7 @@ namespace PizzaDelivery.Models
         public string FirstName { get; set; }
         [Display(Name ="Last Name")]
         public string LastName { get; set; }
-        public string Email { get; set; }
+        
         [ForeignKey("User")]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

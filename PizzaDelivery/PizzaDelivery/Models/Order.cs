@@ -10,7 +10,7 @@ namespace PizzaDelivery.Models
     public class Order
     {
         [Key]
-
+        [Display(Name ="OrderId")]
         public int Id { get; set; }
         public int Total { get; set; }
         public bool OrderConfirmed { get; set; }

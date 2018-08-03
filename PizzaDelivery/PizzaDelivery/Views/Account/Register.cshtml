@@ -1,6 +1,8 @@
 ﻿@model PizzaDelivery.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+                /**/
+
+                ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -28,6 +30,12 @@
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
+    </div>
+
+    <div class="form-group">
+        @Html.RadioButtonFor(m => m.UserRole, "Customer", new { @class = "radio-inline" }) @Html.Label("Customer")
+        @Html.RadioButtonFor(m => m.UserRole, "Employee", new { @class = "radio-inline" }) @Html.Label("Employee")
+        @Html.RadioButtonFor(m => m.UserRole, "Manager", new { @class = "radio-inline" }) @Html.Label("Manager")
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">

@@ -31,23 +31,13 @@ namespace PizzaDelivery.Models
             return new ApplicationDbContext();
         }
 
-        DbSet<Manager> Managers { get; set; }
-        DbSet<Customer> Customers { get; set; }
-        DbSet<Employee> Employees { get; set; }
-        DbSet<Item> Items { get; set; }
-        DbSet<Menu> Menus { get; set; }
-        DbSet<Order> Orders { get; set; }
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Customer> Customers { get; set; }
-
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Order> Orders { get; set; }
-
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Employee> Employees { get; set; }
-
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Item> Items { get; set; }
-
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Manager> Managers { get; set; }
-
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.Menu> Menus { get; set; }
+       
     }
 }

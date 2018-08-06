@@ -22,6 +22,15 @@ namespace PizzaDelivery.Controllers
             return View(orderItems.ToList());
         }
 
+        public ActionResult SingleIndex()
+        {
+            
+            var userId = User.Identity.GetUserId();
+            var orderItem = db.OrderItems.Include(o=>o.Item).Include(o=>o.Order).Where(o => o.Order.UserId == userId).ToList();
+           
+            return View(orderItem);
+        }
+
         // GET: OrderItems/Details/5
         public ActionResult Details(int? id)
         {
@@ -51,19 +60,37 @@ namespace PizzaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ItemId")] OrderItem orderItem)
         {
-            Order order = new Order();
-            order.UserId = User.Identity.GetUserId();
+            var result = db.Orders.OrderByDescending(c => c.Id).Select(c => c.Id).First();
+            orderItem.OrderId = result;
+           
 
             if (ModelState.IsValid)
             {
                 db.OrderItems.Add(orderItem);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("SingleIndex");
             }
 
             ViewBag.ItemId = new SelectList(db.Items, "Id", "Name", orderItem.ItemId);
             return View(orderItem);
         }
+
+        public ActionResult Purchase()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Purchase([Bind(Include = "Id,ItemId")] OrderItem orderItem)
+        {
+           
+                Order order = new Order();
+                orderItem.OrderId = order.Id;
+                db.Orders.Add(order);
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
+
 
         // GET: OrderItems/Edit/5
         public ActionResult Edit(int? id)

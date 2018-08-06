@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201808032108594_fourthmigration.Designer.cs">
       <DependentUpon>201808032108594_fourthmigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808061438307_fifth.cs" />
+    <Compile Include="Migrations\201808061438307_fifth.Designer.cs">
+      <DependentUpon>201808061438307_fifth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -328,6 +332,8 @@
     <Content Include="Views\OrderItems\Details.cshtml" />
     <Content Include="Views\OrderItems\Edit.cshtml" />
     <Content Include="Views\OrderItems\Index.cshtml" />
+    <Content Include="Views\OrderItems\Purchase.cshtml" />
+    <Content Include="Views\OrderItems\SingleIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808032108594_fourthmigration.resx">
       <DependentUpon>201808032108594_fourthmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808061438307_fifth.resx">
+      <DependentUpon>201808061438307_fifth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -60,9 +60,11 @@ namespace PizzaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,ItemId")] OrderItem orderItem)
         {
+            var orderId = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
+            orderId.UserId = User.Identity.GetUserId();
+            //orderItem.Order.UserId = User.Identity.GetUserId();
             var result = db.Orders.OrderByDescending(c => c.Id).Select(c => c.Id).First();
             orderItem.OrderId = result;
-           
 
             if (ModelState.IsValid)
             {
@@ -83,7 +85,7 @@ namespace PizzaDelivery.Controllers
         [HttpPost]
         public ActionResult Purchase(Order order)
         {
-            
+            //needs userID
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Create");
@@ -146,7 +148,7 @@ namespace PizzaDelivery.Controllers
             OrderItem orderItem = db.OrderItems.Find(id);
             db.OrderItems.Remove(orderItem);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("SingleIndex");
         }
 
         protected override void Dispose(bool disposing)

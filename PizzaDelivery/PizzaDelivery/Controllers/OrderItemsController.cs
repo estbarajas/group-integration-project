@@ -81,12 +81,10 @@ namespace PizzaDelivery.Controllers
         }
 
         [HttpPost]
-        public ActionResult Purchase([Bind(Include = "Id,ItemId")] OrderItem orderItem)
+        public ActionResult Purchase(Order order)
         {
-           
-                Order order = new Order();
-                orderItem.OrderId = order.Id;
-                db.Orders.Add(order);
+            
+            db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Create");
         }

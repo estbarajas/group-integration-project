@@ -20,7 +20,7 @@ namespace PizzaDelivery.Models
 
         [ForeignKey("Order")]
         [Display(Name = "Order Id")]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
         public Order Order { get; set; }
 
         [ForeignKey("User")]

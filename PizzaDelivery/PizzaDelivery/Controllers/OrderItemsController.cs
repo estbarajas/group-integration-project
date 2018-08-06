@@ -24,10 +24,30 @@ namespace PizzaDelivery.Controllers
 
         public ActionResult SingleIndex()
         {
-            
+
+            //var orderItem = db.OrderItems.Where(o => o.OrderId == order.Id);
+            //var total = 0;
+            //foreach (var item in orderItem)
+            //{
+            //    total = total + item.Item.Price;
+            //}
+            //order.Total = total;
+
+            //Employee employee = new Employee();
+
+            //var orderItemList = from s in db.OrderItems
+            //                   select s;
+
+            //string userId = User.Identity.GetUserId();
+            //var customerInfo = db.Customers.Where(c => c.UserId.Equals(userId)).Single();
+            //int? orderId = customerInfo.OrderId;
+            //orderItemList = orderItemList.Include(o=>o.Item).Include(o=>o.Order).Where(s => s.OrderId == orderId);
+            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
+
             var userId = User.Identity.GetUserId();
-            var orderItem = db.OrderItems.Include(o=>o.Item).Include(o=>o.Order).Where(o => o.Order.UserId == userId).ToList();
-           
+
+            var orderItem = db.OrderItems.Include(o=>o.Item).Include(o=>o.Order).Where(o => o.Order.UserId == userId && o.OrderId == latestOrder.Id).ToList();
+            //return View(orderItemList.ToList());
             return View(orderItem);
         }
 
@@ -91,6 +111,13 @@ namespace PizzaDelivery.Controllers
             return RedirectToAction("Create");
         }
 
+        public ActionResult MakeNewOrder()
+        {
+            Order order = new Order();
+            db.Orders.Add(order);
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
 
         // GET: OrderItems/Edit/5
         public ActionResult Edit(int? id)
@@ -159,5 +186,12 @@ namespace PizzaDelivery.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+
+
+
     }
 }

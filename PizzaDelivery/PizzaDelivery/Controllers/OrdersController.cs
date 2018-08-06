@@ -48,6 +48,8 @@ namespace PizzaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery")] Order order)
         {
+            
+          
             if (ModelState.IsValid)
             {
                 db.Orders.Add(order);

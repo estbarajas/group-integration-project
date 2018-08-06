@@ -22,6 +22,14 @@ namespace PizzaDelivery.Controllers
             return View(customers.ToList());
         }
 
+        public ActionResult CustomIndex()
+        {
+            var userId = User.Identity.GetUserId();
+            var thisUser = db.Customers.Include(c => c.Order).Where(c => c.UserId == userId).ToList();
+            return View(thisUser);
+        }
+
+
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
@@ -62,6 +70,7 @@ namespace PizzaDelivery.Controllers
             ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", customer.OrderId);
             return View(customer);
         }
+
 
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)

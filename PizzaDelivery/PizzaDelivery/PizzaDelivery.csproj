@@ -260,6 +260,14 @@
     <Compile Include="Migrations\201808071638051_thirteenthMigraion.Designer.cs">
       <DependentUpon>201808071638051_thirteenthMigraion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808071940584_fourteenthMigration.cs" />
+    <Compile Include="Migrations\201808071940584_fourteenthMigration.Designer.cs">
+      <DependentUpon>201808071940584_fourteenthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808072002492_fifthteenthMigration.cs" />
+    <Compile Include="Migrations\201808072002492_fifthteenthMigration.Designer.cs">
+      <DependentUpon>201808072002492_fifthteenthMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Coupon.cs" />
@@ -432,6 +440,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808071638051_thirteenthMigraion.resx">
       <DependentUpon>201808071638051_thirteenthMigraion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071940584_fourteenthMigration.resx">
+      <DependentUpon>201808071940584_fourteenthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808072002492_fifthteenthMigration.resx">
+      <DependentUpon>201808072002492_fifthteenthMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

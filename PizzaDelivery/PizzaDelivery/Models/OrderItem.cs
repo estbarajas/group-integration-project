@@ -21,6 +21,9 @@ namespace PizzaDelivery.Models
         public int? OrderId { get; set; }
         public Order Order { get; set; }
 
+        [Display(Name = "Future Delivery Time")]
+        public string FutureDeliveryTime { get; set; }
+
 
 
         public IEnumerable<Item> Items { get; set; }

@@ -10,108 +10,107 @@ using PizzaDelivery.Models;
 
 namespace PizzaDelivery.Controllers
 {
-    public class OrdersController : Controller
+    public class CouponsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Orders
+        // GET: Coupons
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            return View(db.Coupons.ToList());
         }
 
-        // GET: Orders/Details/5
+        // GET: Coupons/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Coupon coupon = db.Coupons.Find(id);
+            if (coupon == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(coupon);
         }
 
-        // GET: Orders/Create
+        // GET: Coupons/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Orders/Create
+        // POST: Coupons/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery")] Order order)
+        public ActionResult Create([Bind(Include = "Id,Value,Name")] Coupon coupon)
         {
-          
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
+                db.Coupons.Add(coupon);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View(coupon);
         }
 
-        // GET: Orders/Edit/5
+        // GET: Coupons/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Coupon coupon = db.Coupons.Find(id);
+            if (coupon == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(coupon);
         }
 
-        // POST: Orders/Edit/5
+        // POST: Coupons/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Total,OrderConfirmed,OrderPrepped,OrderOutForDelivery")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,Value,Name")] Coupon coupon)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                db.Entry(coupon).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(order);
+            return View(coupon);
         }
 
-        // GET: Orders/Delete/5
+        // GET: Coupons/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Coupon coupon = db.Coupons.Find(id);
+            if (coupon == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(coupon);
         }
 
-        // POST: Orders/Delete/5
+        // POST: Coupons/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            Coupon coupon = db.Coupons.Find(id);
+            db.Coupons.Remove(coupon);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

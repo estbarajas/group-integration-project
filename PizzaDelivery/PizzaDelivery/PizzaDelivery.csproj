@@ -196,6 +196,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CouponsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,8 +232,29 @@
     <Compile Include="Migrations\201808061957024_SixthMigration.Designer.cs">
       <DependentUpon>201808061957024_SixthMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808071238520_SevenMigran.cs" />
+    <Compile Include="Migrations\201808071238520_SevenMigran.Designer.cs">
+      <DependentUpon>201808071238520_SevenMigran.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071244567_eigthMiration.cs" />
+    <Compile Include="Migrations\201808071244567_eigthMiration.Designer.cs">
+      <DependentUpon>201808071244567_eigthMiration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071343379_ninthMIgration.cs" />
+    <Compile Include="Migrations\201808071343379_ninthMIgration.Designer.cs">
+      <DependentUpon>201808071343379_ninthMIgration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071345185_tenthMigration.cs" />
+    <Compile Include="Migrations\201808071345185_tenthMigration.Designer.cs">
+      <DependentUpon>201808071345185_tenthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071453008_eleventhmigration.cs" />
+    <Compile Include="Migrations\201808071453008_eleventhmigration.Designer.cs">
+      <DependentUpon>201808071453008_eleventhmigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Coupon.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -339,6 +361,11 @@
     <Content Include="Views\OrderItems\Purchase.cshtml" />
     <Content Include="Views\OrderItems\SingleIndex.cshtml" />
     <Content Include="Views\Customers\CustomIndex.cshtml" />
+    <Content Include="Views\Coupons\Create.cshtml" />
+    <Content Include="Views\Coupons\Delete.cshtml" />
+    <Content Include="Views\Coupons\Details.cshtml" />
+    <Content Include="Views\Coupons\Edit.cshtml" />
+    <Content Include="Views\Coupons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -374,6 +401,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808061957024_SixthMigration.resx">
       <DependentUpon>201808061957024_SixthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071238520_SevenMigran.resx">
+      <DependentUpon>201808071238520_SevenMigran.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071244567_eigthMiration.resx">
+      <DependentUpon>201808071244567_eigthMiration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071343379_ninthMIgration.resx">
+      <DependentUpon>201808071343379_ninthMIgration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071345185_tenthMigration.resx">
+      <DependentUpon>201808071345185_tenthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071453008_eleventhmigration.resx">
+      <DependentUpon>201808071453008_eleventhmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -22,7 +22,7 @@ namespace PizzaDelivery.Controllers
             return View(orderItems.ToList());
         }
 
-        public ActionResult SingleIndex()
+        public ActionResult SingleIndex(string searchString)
         {
 
             //var orderItem = db.OrderItems.Where(o => o.OrderId == order.Id);
@@ -46,7 +46,32 @@ namespace PizzaDelivery.Controllers
 
             var userId = User.Identity.GetUserId();
 
+
             var orderItem = db.OrderItems.Include(o=>o.Item).Include(o=>o.Order).Where(o => o.Order.UserId == userId && o.OrderId == latestOrder.Id).ToList();
+
+
+            var total = 0;
+            foreach (var item in orderItem)
+            {
+                total += item.Item.Price;
+            }
+            orderItem.First().Order.Total = total;
+
+            //ViewBag.TotalAmount = total;
+
+            
+
+            var coupons = from s in db.Coupons
+                          select s;
+            if (!String.IsNullOrEmpty(searchString)) //use this for day and bottom code run all time for zipcode
+            {
+                var coupon = coupons.Where(s => s.Name.Contains(searchString)).Select(v => v.Value).First();
+                var totalAmount = total - coupon;
+            }
+
+            ViewBag.TotalAmount = totalAmount;
+
+
             //return View(orderItemList.ToList());
             return View(orderItem);
         }
@@ -69,6 +94,8 @@ namespace PizzaDelivery.Controllers
         // GET: OrderItems/Create
         public ActionResult Create()
         {
+           
+
             ViewBag.ItemId = new SelectList(db.Items, "Id", "Name");
             return View();
         }
@@ -85,6 +112,8 @@ namespace PizzaDelivery.Controllers
             //orderItem.Order.UserId = User.Identity.GetUserId();
             var result = db.Orders.OrderByDescending(c => c.Id).Select(c => c.Id).First();
             orderItem.OrderId = result;
+
+
 
             if (ModelState.IsValid)
             {
@@ -105,7 +134,7 @@ namespace PizzaDelivery.Controllers
         [HttpPost]
         public ActionResult Purchase(Order order)
         {
-            //needs userID
+            
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Create");

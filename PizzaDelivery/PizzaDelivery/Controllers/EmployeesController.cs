@@ -22,6 +22,14 @@ namespace PizzaDelivery.Controllers
             return View(employees.ToList());
         }
 
+
+        public ActionResult CustomEmployeeIndex()
+        {
+            var thisUser = User.Identity.GetUserId();
+            var employee = db.Employees.Include(e => e.Order).Where(c => c.UserId == thisUser).ToList();
+            return View(employee);
+        }
+
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
@@ -29,7 +37,7 @@ namespace PizzaDelivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees.Include(e=>e.Order).Where(m=>m.Id == id).FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -49,7 +57,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,OrderId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -76,6 +84,7 @@ namespace PizzaDelivery.Controllers
                 return HttpNotFound();
             }
             ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", employee.OrderId);
+            
             return View(employee);
         }
 
@@ -84,10 +93,11 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,OrderId")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,OrderId,UserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {
+                // var employeeTest = db.Employees.Where(e => e.Id == employee.Id).FirstOrDefault();                   
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

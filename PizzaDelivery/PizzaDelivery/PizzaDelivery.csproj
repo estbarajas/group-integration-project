@@ -252,6 +252,14 @@
     <Compile Include="Migrations\201808071453008_eleventhmigration.Designer.cs">
       <DependentUpon>201808071453008_eleventhmigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808071637107_twelthMigration.cs" />
+    <Compile Include="Migrations\201808071637107_twelthMigration.Designer.cs">
+      <DependentUpon>201808071637107_twelthMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808071638051_thirteenthMigraion.cs" />
+    <Compile Include="Migrations\201808071638051_thirteenthMigraion.Designer.cs">
+      <DependentUpon>201808071638051_thirteenthMigraion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Coupon.cs" />
@@ -334,7 +342,6 @@
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
-    <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Items\Delete.cshtml" />
@@ -366,6 +373,9 @@
     <Content Include="Views\Coupons\Details.cshtml" />
     <Content Include="Views\Coupons\Edit.cshtml" />
     <Content Include="Views\Coupons\Index.cshtml" />
+    <Content Include="Views\Employees\CustomEmployeeIndex.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Orders\EmployeeCustomOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -416,6 +426,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808071453008_eleventhmigration.resx">
       <DependentUpon>201808071453008_eleventhmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071637107_twelthMigration.resx">
+      <DependentUpon>201808071637107_twelthMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808071638051_thirteenthMigraion.resx">
+      <DependentUpon>201808071638051_thirteenthMigraion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

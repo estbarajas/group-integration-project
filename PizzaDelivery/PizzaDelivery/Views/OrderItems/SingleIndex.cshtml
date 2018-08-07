@@ -34,16 +34,24 @@
             </td>
         </tr>
 
-        <p>
-            Apply Coupon: @Html.TextBox("SearchString")
-            <input type="submit" value="Search" />
-        </p>
 
     }
 
 
 
 </table>
+
 <h2>Your total:</h2>
 <h1>$@ViewBag.TotalAmount</h1>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Apply Coupon Code: @Html.TextBox("SearchString")
+        <input type="submit" value="Apply" />
+    </p>
+}
+
+<br />
+
 @Html.ActionLink("Checkout", "Purchase")

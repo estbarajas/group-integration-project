@@ -15,6 +15,7 @@ namespace PizzaDelivery.Models
         public int Total { get; set; }
         public bool OrderConfirmed { get; set; }
         public bool OrderPrepped { get; set; }
+        [Display(Name ="Order Completed")]
         public bool OrderOutForDelivery { get; set; }
 
         [ForeignKey("User")]

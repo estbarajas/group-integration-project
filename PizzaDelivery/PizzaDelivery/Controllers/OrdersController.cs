@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using PizzaDelivery.Models;
 
 namespace PizzaDelivery.Controllers
@@ -19,6 +20,19 @@ namespace PizzaDelivery.Controllers
         {
             return View(db.Orders.ToList());
         }
+
+
+        public ActionResult EmployeeCustomOrder()
+        {
+            var employeeId = User.Identity.GetUserId();
+            var employee = db.Employees.Where(e => e.UserId == employeeId).FirstOrDefault();
+            var order = db.Orders.Where(o => o.Id == employee.OrderId);
+            return View(order);
+        }
+
+
+
+
 
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
@@ -85,7 +99,7 @@ namespace PizzaDelivery.Controllers
             {
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("EmployeeCustomOrder");
             }
             return View(order);
         }

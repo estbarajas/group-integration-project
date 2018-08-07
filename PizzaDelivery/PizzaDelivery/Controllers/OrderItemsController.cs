@@ -57,7 +57,7 @@ namespace PizzaDelivery.Controllers
             }
             orderItem.First().Order.Total = total;
 
-            //ViewBag.TotalAmount = total;
+            ViewBag.TotalAmount = total;
 
             
 
@@ -66,10 +66,10 @@ namespace PizzaDelivery.Controllers
             if (!String.IsNullOrEmpty(searchString)) //use this for day and bottom code run all time for zipcode
             {
                 var coupon = coupons.Where(s => s.Name.Contains(searchString)).Select(v => v.Value).First();
-                var totalAmount = total - coupon;
+                ViewBag.TotalAmount = total - coupon;
             }
 
-            ViewBag.TotalAmount = totalAmount;
+           
 
 
             //return View(orderItemList.ToList());

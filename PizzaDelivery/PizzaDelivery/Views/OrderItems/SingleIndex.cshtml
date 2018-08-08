@@ -32,7 +32,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Item.Price)
             </td>
-            <td></td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FutureDeliveryTime)
+            </td>
 
             <td>
                 @Html.ActionLink("Remove", "Delete", new { id = item.Id })
@@ -43,33 +45,42 @@
                 </td>*@
         </tr>
 
-
     }
-
 
 
 </table>
 
-@using (Html.BeginForm("FormTwo", "OrderItems", FormMethod.Post))
+
+
+@*@using (Html.BeginForm("FormTwo", "OrderItems", FormMethod.Post))
+    {
+        @Html.TextBoxFor(model => model.Select(f => f.FutureDeliveryTime));
+        @Html.ValidationMessageFor(model => model.Select(f => f.FutureDeliveryTime))
+        <input type="submit" value="sub" />
+    }*@
+
+<h2>Enter your desired delivery time:</h2>
+@using (Html.BeginForm("UpdateDeliveryTime", "OrderItems"))
 {
-    @Html.TextBoxFor(model => model.Select(f => f.FutureDeliveryTime));
-    @Html.ValidationMessageFor(model => model.Select(f => f.FutureDeliveryTime))
-    <input type="submit" value="sub" />
+
+    <input id="Text1" type="text" name="txtOne" />
+    <input id="Button1" type="submit" value="Submit" />
 }
 
 
 
-<h2>Your total:</h2>
-<h1>$@ViewBag.TotalAmount</h1>
+
 
 @using (Html.BeginForm())
 {
     <p>
-        Apply Coupon Code: @Html.TextBox("SearchString")
+        <h2>Apply Coupon Code:</h2> @Html.TextBox("SearchString")
         <input type="submit" value="Apply" />
     </p>
 }
 
+<h2>Your total:</h2>
+<h1>$@ViewBag.TotalAmount</h1>
 
 
 <br />

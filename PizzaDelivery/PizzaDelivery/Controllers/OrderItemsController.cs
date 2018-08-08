@@ -76,18 +76,24 @@ namespace PizzaDelivery.Controllers
             return View(orderItem);
         }
 
+
+
+  
+
         [HttpPost]
-        public ActionResult FormTwo(OrderItem orderItem)
+        public ActionResult UpdateDeliveryTime()
         {
+            var thisUserId = User.Identity.GetUserId();
+            var currentCustomer = db.Customers.Where(c => c.UserId == thisUserId).FirstOrDefault();
 
-            //if (ModelState.IsValid)
-            //{
-                db.OrderItems.Add(orderItem);
-                db.SaveChanges();
-           // }
+            string textboxValue = Request.Form["txtOne"];
+            var latestOrderItem = db.OrderItems.OrderByDescending(c => c.Id == 53).First();
+            latestOrderItem.FutureDeliveryTime = textboxValue;
+            db.SaveChanges();
 
-            return View("Index");
+            return RedirectToAction("SingleIndex", new { Id = currentCustomer.Id });
 
+           
         }
 
 

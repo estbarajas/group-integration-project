@@ -72,10 +72,24 @@ namespace PizzaDelivery.Controllers
            
 
 
-
             //return View(orderItemList.ToList());
             return View(orderItem);
         }
+
+        [HttpPost]
+        public ActionResult FormTwo(OrderItem orderItem)
+        {
+
+            //if (ModelState.IsValid)
+            //{
+                db.OrderItems.Add(orderItem);
+                db.SaveChanges();
+           // }
+
+            return View("Index");
+
+        }
+
 
         // GET: OrderItems/Details/5
         public ActionResult Details(int? id)

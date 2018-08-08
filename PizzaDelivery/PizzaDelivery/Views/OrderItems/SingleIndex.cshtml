@@ -32,23 +32,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Item.Price)
             </td>
-            <td>
-               
-            </td>
+            <td></td>
+
             <td>
                 @Html.ActionLink("Remove", "Delete", new { id = item.Id })
             </td>
+            @*<td>
+                    @Html.TextBoxFor(modelItem => item.FutureDeliveryTime)
+                    <input type="submit" value="Generate report" />
+                </td>*@
         </tr>
 
 
     }
 
+
+
 </table>
 
+@using (Html.BeginForm("FormTwo", "OrderItems", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.Select(f => f.FutureDeliveryTime));
+    @Html.ValidationMessageFor(model => model.Select(f => f.FutureDeliveryTime))
+    <input type="submit" value="sub" />
+}
 
-
-
-Collapse 
 
 
 <h2>Your total:</h2>
@@ -62,14 +70,6 @@ Collapse 
     </p>
 }
 
-
-@*@using (Html.BeginForm())
-    {
-        <p>
-            Enter Delivery Time: @Html.TextBox("FutureDelivery")
-            <input type="submit" value="Apply" />
-        </p>
-    }*@
 
 
 <br />

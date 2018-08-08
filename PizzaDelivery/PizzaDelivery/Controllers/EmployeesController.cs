@@ -64,7 +64,7 @@ namespace PizzaDelivery.Controllers
                 employee.UserId = User.Identity.GetUserId();
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", employee.OrderId);

@@ -389,6 +389,7 @@
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Orders\EmployeeCustomOrder.cshtml" />
     <Content Include="Views\OrderItems\Progress.cshtml" />
+    <Content Include="Views\Shared\AnonymousUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -100,7 +100,7 @@ namespace PizzaDelivery.Controllers
 
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("EmployeeCustomOrder");
+                return RedirectToAction("Index", "Home");
             }
             return View(order);
         }

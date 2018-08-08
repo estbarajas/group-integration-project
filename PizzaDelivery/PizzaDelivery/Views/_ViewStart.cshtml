@@ -9,9 +9,13 @@
     {
         cLayout = "~/Views/Shared/EmployeeLayout.cshtml";
     }
-    else
+    else if(User.IsInRole("Customer"))
     {
         cLayout = "~/Views/Shared/Customer.cshtml";
+    }
+    else
+    {
+        cLayout = "~/Views/Shared/AnonymousUser.cshtml";
     }
     Layout = cLayout;
 }

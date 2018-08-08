@@ -388,7 +388,7 @@
     <Content Include="Views\Employees\CustomEmployeeIndex.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Orders\EmployeeCustomOrder.cshtml" />
-    <Content Include="Views\Orders\View.cshtml" />
+    <Content Include="Views\OrderItems\Progress.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

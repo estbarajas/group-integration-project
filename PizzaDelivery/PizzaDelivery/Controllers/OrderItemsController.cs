@@ -97,8 +97,21 @@ namespace PizzaDelivery.Controllers
         }
 
 
+        public ActionResult Progress()
+        {
+            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
+            var userId = User.Identity.GetUserId();
+            var orderItem = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.OrderId == latestOrder.Id-2).ToList();
+
+            //ViewBag.LOL = orderItem.First().Order.OrderConfirmed;
+            //return View(orderItem.First());
+            return View(orderItem.First());
+
+        }
+
+
         // GET: OrderItems/Details/5
-        public ActionResult Details(int? id)
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {

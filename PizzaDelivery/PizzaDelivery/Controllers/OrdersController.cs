@@ -97,6 +97,7 @@ namespace PizzaDelivery.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("EmployeeCustomOrder");
@@ -129,6 +130,13 @@ namespace PizzaDelivery.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

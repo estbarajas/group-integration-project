@@ -101,9 +101,12 @@ namespace PizzaDelivery.Controllers
         {
             var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
             var userId = User.Identity.GetUserId();
-            var orderItem = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.OrderId == latestOrder.Id-2).ToList();
+            var customerName = db.Customers.Where(c => c.UserId == userId).Select(c => c).First();
+            var orderItem = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.OrderId == latestOrder.Id).ToList();
 
-            //ViewBag.LOL = orderItem.First().Order.OrderConfirmed;
+            ViewBag.FirstName = customerName.FirstName;
+            ViewBag.LastName = customerName.LastName;
+            ViewBag.LOL = orderItem.First().Order.OrderConfirmed;
             //return View(orderItem.First());
             return View(orderItem.First());
 
@@ -171,7 +174,7 @@ namespace PizzaDelivery.Controllers
             
             db.Orders.Add(order);
             db.SaveChanges();
-            return RedirectToAction("Create");
+            return RedirectToAction("Progress");
         }
 
         public ActionResult MakeNewOrder()

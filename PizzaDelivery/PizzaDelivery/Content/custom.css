@@ -1,0 +1,80 @@
+﻿body, html {
+    height: 100%;
+}
+
+/* The hero image */
+.hero-image {
+    margin-top:10px;
+    height: 400px;
+    background: linear-gradient(black, transparent 65%), linear-gradient(0deg, black, transparent), black url('nick-hillier-254650-unsplash.jpg') no-repeat center 75%;
+    background-size: cover;
+    position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.banner-image {
+    height:250px;
+    background: linear-gradient(black, transparent 65%), black url('nadya-spetnitskaya-544582-unsplash.jpg') no-repeat center 20%;
+    background-size: cover;
+    position: relative;
+}
+
+a, a:hover {
+    font-family: 'Montserrat', sans-serif !important;
+    /*color: #F8F5F0 !important;*/
+    text-decoration: none;
+}
+
+
+
+.hero-text h1 {
+        font-family: 'Dancing Script', cursive;
+        font-size: 4em;
+        text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    }
+
+.btn {
+    font-family: 'Montserrat', sans-serif;
+    padding:0.75rem, 1.50rem;
+    font-weight:600;
+    
+}
+
+.landing_img {
+    display: block;
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #8E8C84;
+}
+    /*.navbar {
+    background-color: transparent;
+    background: transparent;
+    border-color: transparent;
+}
+.navbar li {
+        color: #000
+    }
+
+.bg-dark {
+    background-color: transparent !important;
+}
+
+.navbar-default {
+    background: none;
+    border: none;
+}*/
+

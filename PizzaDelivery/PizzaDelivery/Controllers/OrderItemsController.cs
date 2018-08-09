@@ -172,8 +172,8 @@ namespace PizzaDelivery.Controllers
         public ActionResult Purchase(Order order)
         {
             
-            db.Orders.Add(order);
-            db.SaveChanges();
+            //db.Orders.Add(order);
+            //db.SaveChanges();
             return RedirectToAction("Progress");
         }
 

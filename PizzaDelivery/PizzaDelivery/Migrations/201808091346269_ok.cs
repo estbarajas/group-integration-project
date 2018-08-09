@@ -3,10 +3,20 @@ namespace PizzaDelivery.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class firstmigration : DbMigration
+    public partial class ok : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Coupons",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Value = c.Int(nullable: false),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Customers",
                 c => new
@@ -38,8 +48,11 @@ namespace PizzaDelivery.Migrations
                         OrderConfirmed = c.Boolean(nullable: false),
                         OrderPrepped = c.Boolean(nullable: false),
                         OrderOutForDelivery = c.Boolean(nullable: false),
+                        UserId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -145,10 +158,14 @@ namespace PizzaDelivery.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         ItemId = c.Int(),
+                        OrderId = c.Int(),
+                        FutureDeliveryTime = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Items", t => t.ItemId)
-                .Index(t => t.ItemId);
+                .ForeignKey("dbo.Orders", t => t.OrderId)
+                .Index(t => t.ItemId)
+                .Index(t => t.OrderId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -165,16 +182,19 @@ namespace PizzaDelivery.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.OrderItems", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.OrderItems", "ItemId", "dbo.Items");
             DropForeignKey("dbo.Managers", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Employees", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Employees", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Customers", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Customers", "OrderId", "dbo.Orders");
+            DropForeignKey("dbo.Orders", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Customers", "OrderId", "dbo.Orders");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.OrderItems", new[] { "OrderId" });
             DropIndex("dbo.OrderItems", new[] { "ItemId" });
             DropIndex("dbo.Managers", new[] { "UserId" });
             DropIndex("dbo.Employees", new[] { "UserId" });
@@ -184,6 +204,7 @@ namespace PizzaDelivery.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.Customers", new[] { "UserId" });
             DropIndex("dbo.Customers", new[] { "OrderId" });
             DropTable("dbo.AspNetRoles");
@@ -197,6 +218,7 @@ namespace PizzaDelivery.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Orders");
             DropTable("dbo.Customers");
+            DropTable("dbo.Coupons");
         }
     }
 }

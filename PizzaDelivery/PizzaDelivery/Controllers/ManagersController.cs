@@ -54,7 +54,7 @@ namespace PizzaDelivery.Controllers
                 manager.UserId = User.Identity.GetUserId();
                 db.Managers.Add(manager);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Account");
             }
 
             return View(manager);

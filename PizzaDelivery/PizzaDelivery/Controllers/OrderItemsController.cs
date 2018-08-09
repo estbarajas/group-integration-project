@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PizzaDelivery.Models;
+using Stripe;
 
 namespace PizzaDelivery.Controllers
 {
@@ -108,7 +109,10 @@ namespace PizzaDelivery.Controllers
             ViewBag.LastName = customerName.LastName;
             ViewBag.LOL = orderItem.First().Order.OrderConfirmed;
             //return View(orderItem.First());
+
+
             return View(orderItem.First());
+
 
         }
 
@@ -171,15 +175,16 @@ namespace PizzaDelivery.Controllers
         [HttpPost]
         public ActionResult Purchase(Order order)
         {
-            
+
             //db.Orders.Add(order);
             //db.SaveChanges();
-            return RedirectToAction("Progress");
+            return RedirectToAction("GetMaps", "GoogleMapInformations");
         }
 
         public ActionResult MakeNewOrder()
         {
             Order order = new Order();
+            order.OrderConfirmed = true;
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Create");
@@ -242,6 +247,38 @@ namespace PizzaDelivery.Controllers
             db.OrderItems.Remove(orderItem);
             db.SaveChanges();
             return RedirectToAction("SingleIndex");
+        }
+
+        public ActionResult SetStripeInfo()
+        {
+            StripeConfiguration.SetApiKey("sk_test_CnNJ5zBRKKTfFb3NCSj6MGLf");
+            var stripePublishKey = "pk_test_qXVnowf9XbxuKvbKIq8a5UiG";
+            ViewBag.StripePublishKey = stripePublishKey;
+
+            return View();
+        }
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            var customers = new StripeCustomerService();
+            var charges = new StripeChargeService();
+
+            var customer = customers.Create(new StripeCustomerCreateOptions
+            {
+                Email = stripeEmail,
+                SourceToken = stripeToken
+            });
+
+            var charge = charges.Create(new StripeChargeCreateOptions
+            {
+                Amount = 500,//charge in cents
+                Description = "Your Total",
+                Currency = "usd",
+                CustomerId = customer.Id
+            });
+
+            // further application specific code goes here
+
+            return View();
         }
 
         protected override void Dispose(bool disposing)

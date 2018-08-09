@@ -38,7 +38,12 @@ namespace PizzaDelivery.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Coupon> Coupons { get; set; }
+        public DbSet<GoogleMapInformation> GoogleMapInformations { get; set; }
 
-        
+        public DbSet<EmailAPI> EmailAPIs { get; set; }
+
+        public DbSet<TextAPI> TextAPIs { get; set; }
+
+        public System.Data.Entity.DbSet<PizzaDelivery.Models.StripeAPI> StripeAPIs { get; set; }
     }
 }

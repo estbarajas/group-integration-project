@@ -1,0 +1,178 @@
+﻿@model PizzaDelivery.Models.GoogleMapInformation
+
+@{
+    ViewBag.Title = "GetMaps";
+}
+
+<h2>GetMaps</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+}
+
+<head>
+    <title>Distance Matrix Service</title>
+    <style>
+        #right-panel {
+            font-family: 'Roboto','sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+            #right-panel select, #right-panel input {
+                font-size: 15px;
+            }
+
+            #right-panel select {
+                width: 100%;
+            }
+
+            #right-panel i {
+                font-size: 12px;
+            }
+
+        body {
+            height: 100%;
+            display: block;
+            margin: 8px;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100%;
+            width: 50%;
+        }
+
+        #right-panel {
+            float: right;
+            width: 48%;
+            padding-left: 2%;
+        }
+
+        #output {
+            font-size: 11px;
+        }
+    </style>
+</head>
+
+<body>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    
+    <div id="output"></div>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var bounds = new google.maps.LatLngBounds;
+            var markersArray = [];
+            var customerInput = '@(ViewBag.ToAdress)';
+            var origin1 = '333 N Plankinton Ave, Milwaukee, WI, USA';
+            var destinationA = customerInput;
+            console.log(customerInput);
+            console.log(origin1);
+            console.log(destinationA);
+            var destinationIcon = 'https://chart.googleapis.com/chart?' +
+                'chst=d_map_pin_letter&chld=D|FF0000|000000';
+            var originIcon = 'https://chart.googleapis.com/chart?' +
+                'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 55.53, lng: 9.4 },
+                zoom: 10
+            });
+            var geocoder = new google.maps.Geocoder;
+            var service = new google.maps.DistanceMatrixService;
+            service.getDistanceMatrix({
+                origins: [origin1],
+                destinations: [destinationA],
+                travelMode: 'DRIVING',
+                drivingOptions: {
+                    departureTime: new Date(Date.now()),
+                    trafficModel: 'bestguess'
+                },
+                unitSystem: google.maps.UnitSystem.IMPERIAL,
+                avoidHighways: false,
+                avoidTolls: false
+            },
+                function (response, status) {
+                    if (status !== 'OK') {
+                        alert('Error was: ' + status);
+                    }
+                    else {
+                        var originList = response.originAddresses;
+                        var destinationList = response.destinationAddresses;
+                        var outputDiv = document.getElementById('output');
+                        outputDiv.innerHTML = '';
+                        deleteMarkers(markersArray);
+                        var showGeocodedAddressOnMap = function (asDestination) {
+                            var icon = asDestination ? destinationIcon : originIcon;
+                            return function (results, status) {
+                                if (status === 'OK') {
+                                    map.fitBounds(bounds.extend(results[0].geometry.location));
+                                    markersArray.push(new google.maps.Marker({
+                                        map: map,
+                                        position: results[0].geometry.location,
+                                        icon: icon
+                                    }));
+                                }
+                                else {
+                                    alert('Geocode was not successful due to: ' + status);
+                                }
+                            };
+                        };
+                        for (var i = 0; i < originList.length; i++) {
+                            var results = response.rows[i].elements[0];
+                            console.log('this is stuff ', results);
+                            var url = "/GoogleMapInformations/GetMaps";
+                            $.ajax({
+                                url: url,
+                                type: 'POST',
+                                data: {
+                                    'customerDurationResults': results.duration_in_traffic.text,
+                                    'customerDistanceResults': results.distance.text,
+                                    'customerInput': customerInput
+                                },
+                                success: function (html) {
+                                    alert(results.duration_in_traffic.text);
+                                },
+                            });                            
+                            geocoder.geocode({ 'address': originList[i] },
+                                showGeocodedAddressOnMap(false));
+                            for (var j = 0; j < results.length; j++) {
+                                geocoder.geocode({ 'address': destinationList[j] },
+                                    showGeocodedAddressOnMap(true));
+
+                                outputDiv.innerHTML = originList[i] + ' to ' + destinationList[j]; +
+                                    ': ' + results[j].distance.text + ' in ' +
+                                    results[j].duration.text + '<br>';
+                            }
+                        }
+                    }
+                });
+        }
+        function submitUserInput() {
+            var travelDistance = new Object();
+            var travelDuration = new Object();
+            travelDuration.RouteTime = results[j].duration.text;
+        }
+        function deleteMarkers(markersArray) {
+            for (var i = 0; i < markersArray.length; i++) {
+                markersArray[i].setMap(null);
+            }
+            markersArray = [];
+        }
+    </script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK_61BS6gzz3DXCscABmDnqE8_6KJXGXQ">
+    </script>
+</body>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

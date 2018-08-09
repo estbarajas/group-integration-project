@@ -1,0 +1,20 @@
+﻿@model PizzaDelivery.Models.OrderItem
+
+@{
+    ViewBag.Title = "SetStripeInfo";
+}
+
+<h2 style="margin-top: 20px;"></h2>
+
+<form action="/OrderItems/Charge" method="POST">
+    <article>
+        <label>Amount: $5.00</label>
+    </article>
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@ViewBag.StripePublishKey"
+            data-locale="auto"
+            data-description="Sample Charge"
+            data-amount="500">
+    </script>
+</form>

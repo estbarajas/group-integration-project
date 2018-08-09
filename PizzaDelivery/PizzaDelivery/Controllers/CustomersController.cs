@@ -64,7 +64,7 @@ namespace PizzaDelivery.Controllers
                 customer.UserId = User.Identity.GetUserId();
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("CustomIndex");
+                return RedirectToAction("Login", "Account");
             }
 
             ViewBag.OrderId = new SelectList(db.Orders, "Id", "Id", customer.OrderId);

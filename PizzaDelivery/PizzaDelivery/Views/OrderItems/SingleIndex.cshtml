@@ -4,7 +4,7 @@
     ViewBag.Title = "SingleIndex";
 }
 
-<h2 style="margin-top: 20px;">SingleIndex</h2>
+<h2 style="margin-top: 20px;">Your Order</h2>
 
 <p>
     @Html.ActionLink("Add item", "Create")
@@ -59,7 +59,7 @@
         <input type="submit" value="sub" />
     }*@
 
-<h2>Enter your desired delivery time:</h2>
+<h6>Enter your desired delivery time:</h6>
 @using (Html.BeginForm("UpdateDeliveryTime", "OrderItems"))
 {
 
@@ -74,12 +74,12 @@
 @using (Html.BeginForm())
 {
     <p>
-        <h2>Apply Coupon Code:</h2> @Html.TextBox("SearchString")
+        <h6>Apply Coupon Code:</h6> @Html.TextBox("SearchString")
         <input type="submit" value="Apply" />
     </p>
 }
 
-<h2>Your total:</h2>
+<h4>Your total:</h4>
 <h1>$@ViewBag.TotalAmount</h1>
 
 

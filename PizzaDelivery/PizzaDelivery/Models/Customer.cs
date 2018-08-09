@@ -24,7 +24,7 @@ namespace PizzaDelivery.Models
         public bool EmailNotification { get; set; }
         [Display(Name ="Text Notification")]
         public bool TextNotification { get; set; }
-
+        public string PhoneNumber { get; set; }
    
 
         [ForeignKey("Order")]

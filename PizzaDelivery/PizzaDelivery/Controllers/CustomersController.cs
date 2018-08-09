@@ -57,7 +57,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber")] Customer customer)
         {
             if (ModelState.IsValid)
             {

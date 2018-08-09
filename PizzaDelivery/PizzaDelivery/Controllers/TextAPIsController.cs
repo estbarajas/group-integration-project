@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using PizzaDelivery.Models;
+using Microsoft.AspNet.Identity;
 
 namespace PizzaDelivery.Controllers
 {
@@ -18,15 +19,18 @@ namespace PizzaDelivery.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public void SendText(GoogleMapInformation googleMapInformation)
+        public void SendText(string userId)
         {
-            string toPhoneNumber = "+12624701514";
+            
+            var user = db.Customers.Where(c => c.UserId == userId).Select(c => c).FirstOrDefault();
+
+            string toPhoneNumber = "+1" + user.PhoneNumber;
             TextAPI textAPI = new TextAPI();
             textAPI.SendToPhoneNumber = toPhoneNumber;
             string sendFromNumber = "+19205450383";
             textAPI.SendFromPhoneNumber = sendFromNumber;
 
-            var deliveryTime = googleMapInformation.RouteTime;
+            var deliveryTime = 39;
 
             string textBody = "Thank you for your order! Your order's estimated arrival time is " + deliveryTime + " minutes";
             // Find your Account Sid and Auth Token at twilio.com/console

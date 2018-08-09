@@ -242,25 +242,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201808091609191_UpdatingTeamProjectWithAPIs.cs" />
-    <Compile Include="Migrations\201808091609191_UpdatingTeamProjectWithAPIs.Designer.cs">
-      <DependentUpon>201808091609191_UpdatingTeamProjectWithAPIs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808091629247_TestingThatAllFilesTransferred.cs" />
-    <Compile Include="Migrations\201808091629247_TestingThatAllFilesTransferred.Designer.cs">
-      <DependentUpon>201808091629247_TestingThatAllFilesTransferred.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808091645132_AddedStripeAPI.cs" />
-    <Compile Include="Migrations\201808091645132_AddedStripeAPI.Designer.cs">
-      <DependentUpon>201808091645132_AddedStripeAPI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808091647476_FixingErrors.cs" />
-    <Compile Include="Migrations\201808091647476_FixingErrors.Designer.cs">
-      <DependentUpon>201808091647476_FixingErrors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201808091918588_ChangedZipCodeFromIntToString.cs" />
-    <Compile Include="Migrations\201808091918588_ChangedZipCodeFromIntToString.Designer.cs">
-      <DependentUpon>201808091918588_ChangedZipCodeFromIntToString.cs</DependentUpon>
+    <Compile Include="Migrations\201808092206321_Remigrating.cs" />
+    <Compile Include="Migrations\201808092206321_Remigrating.Designer.cs">
+      <DependentUpon>201808092206321_Remigrating.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -420,20 +404,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201808091609191_UpdatingTeamProjectWithAPIs.resx">
-      <DependentUpon>201808091609191_UpdatingTeamProjectWithAPIs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808091629247_TestingThatAllFilesTransferred.resx">
-      <DependentUpon>201808091629247_TestingThatAllFilesTransferred.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808091645132_AddedStripeAPI.resx">
-      <DependentUpon>201808091645132_AddedStripeAPI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808091647476_FixingErrors.resx">
-      <DependentUpon>201808091647476_FixingErrors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201808091918588_ChangedZipCodeFromIntToString.resx">
-      <DependentUpon>201808091918588_ChangedZipCodeFromIntToString.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808092206321_Remigrating.resx">
+      <DependentUpon>201808092206321_Remigrating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

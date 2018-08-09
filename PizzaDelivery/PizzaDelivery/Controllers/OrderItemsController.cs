@@ -100,8 +100,14 @@ namespace PizzaDelivery.Controllers
 
         public ActionResult Progress()
         {
-            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
             var userId = User.Identity.GetUserId();
+            TextAPIsController text = new TextAPIsController();
+            text.SendText(userId);
+            EmailAPIsController email = new EmailAPIsController();
+            email.SendEmail(userId);
+
+            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
+            userId = User.Identity.GetUserId();
             var customerName = db.Customers.Where(c => c.UserId == userId).Select(c => c).First();
             var orderItem = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.OrderId == latestOrder.Id).ToList();
 
@@ -178,7 +184,7 @@ namespace PizzaDelivery.Controllers
 
             //db.Orders.Add(order);
             //db.SaveChanges();
-            return RedirectToAction("GetMaps", "GoogleMapInformations");
+            return RedirectToAction("Progress");
         }
 
         public ActionResult MakeNewOrder()

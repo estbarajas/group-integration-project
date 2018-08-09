@@ -32,10 +32,10 @@ namespace PizzaDelivery.Controllers
         }
 
         [HttpPost]
-        public void SendEmail(string userID)
+        public void SendEmail(string userId)
         {
-            userID = User.Identity.GetUserId();
-            var user = db.Users.Where(c => c.Id == userID).FirstOrDefault();
+            
+            var user = db.Users.Where(c => c.Id == userId).FirstOrDefault();
             var userEmail = user.Email;
 
             SmtpClient client = new SmtpClient();
@@ -56,7 +56,7 @@ namespace PizzaDelivery.Controllers
 
             msg.Subject = "Thank God";
             msg.IsBodyHtml = true;
-            msg.Body = string.Format("<html><head></head><body><b>Fuck yes...... this worked!!!</b></body>");
+            msg.Body = string.Format("<html><head></head><body><b>This worked!!!</b></body>");
 
             client.Send(msg);
         }

@@ -19,10 +19,10 @@
             <div class="navbar-collapse collapse container" id="navbarSupportedContent">
 
                 <ul class="nav navbar-nav mr-auto">
-                    <li>@Html.ActionLink("My Information", "CustomIndex", "Customers")</li>
-                    <li>@Html.ActionLink("Menu", "Index", "Items")</li>
-                    <li>@Html.ActionLink("Place Order", "MakeNewOrder", "OrderItems")</li>
-                    <li>@Html.ActionLink("Track My Order", "Progress", "OrderItems")</li>
+                    <li class"nav-item">@Html.ActionLink("My Information", "CustomIndex", "Customers", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class"nav-item">@Html.ActionLink("Menu", "Index", "Items", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class"nav-item">@Html.ActionLink("Place Order", "MakeNewOrder", "OrderItems", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class"nav-item">@Html.ActionLink("Track My Order", "Progress", "OrderItems", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

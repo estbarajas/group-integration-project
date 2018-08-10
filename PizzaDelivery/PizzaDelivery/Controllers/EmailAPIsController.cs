@@ -32,11 +32,14 @@ namespace PizzaDelivery.Controllers
         }
 
         [HttpPost]
-        public void SendEmail(string userId)
+        public void SendEmail(string userId, Order order, GoogleMapInformation google)
         {
             
-            var user = db.Users.Where(c => c.Id == userId).FirstOrDefault();
+            var user = db.Customers.Where(c => c.UserId == userId).Select(c => c).FirstOrDefault();
             var userEmail = user.Email;
+            var customerName = user.FirstName;
+            var orderStatus = order.OrderOutForDelivery;
+            var customerDeliveryTime = google.RouteTime;
 
             SmtpClient client = new SmtpClient();
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -45,20 +48,29 @@ namespace PizzaDelivery.Controllers
             client.Port = 587;
 
             // setup Smtp authentication
-            System.Net.NetworkCredential credentials =
-            new System.Net.NetworkCredential("oliver.ryan9008@gmail.com", "Yashua86");
+            NetworkCredential credentials =
+            new NetworkCredential("oliver.ryan9008@gmail.com", "Yashua86");
             client.UseDefaultCredentials = false;
             client.Credentials = credentials;
 
             MailMessage msg = new MailMessage();
             msg.From = new MailAddress("devcodeitalianeatery@gmail.com", "The Italian Eatery");
             msg.To.Add(new MailAddress(userEmail));
+            if (orderStatus != true)
+            {
+                msg.Subject = "Thank you for your order!";
+                msg.IsBodyHtml = false;
+                msg.Body = string.Format("Thank you for ordering from The Italian Eatery, " + customerName + "!");
+                
 
-            msg.Subject = "Thank God";
-            msg.IsBodyHtml = true;
-            msg.Body = string.Format("<html><head></head><body><b>This worked!!!</b></body>");
-
-            client.Send(msg);
+                client.Send(msg);
+            }
+            else
+            {
+                msg.Subject = "Thank you for your order!";
+                msg.Body = string.Format("Your food is now out for delivery, " + customerName + "! Your driver should be dropping off in approximately " + customerDeliveryTime + " minutes! Enjoy the best Italian food in Milwaukee!!!");
+                client.Send(msg);
+            }
         }
         
         protected override void Dispose(bool disposing)

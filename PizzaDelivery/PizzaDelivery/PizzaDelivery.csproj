@@ -246,6 +246,10 @@
     <Compile Include="Migrations\201808092206321_Remigrating.Designer.cs">
       <DependentUpon>201808092206321_Remigrating.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808100006072_AddedEmailPropertyToCustomer.cs" />
+    <Compile Include="Migrations\201808100006072_AddedEmailPropertyToCustomer.Designer.cs">
+      <DependentUpon>201808100006072_AddedEmailPropertyToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Coupon.cs" />
@@ -406,6 +410,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808092206321_Remigrating.resx">
       <DependentUpon>201808092206321_Remigrating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808100006072_AddedEmailPropertyToCustomer.resx">
+      <DependentUpon>201808100006072_AddedEmailPropertyToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

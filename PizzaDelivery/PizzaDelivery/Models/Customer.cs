@@ -25,12 +25,10 @@ namespace PizzaDelivery.Models
         [Display(Name ="Text Notification")]
         public bool TextNotification { get; set; }
         public string PhoneNumber { get; set; }
-   
-
+        public string Email { get; set; }
         [ForeignKey("Order")]
         public int? OrderId { get; set; }
         public Order Order { get; set; }
-
         [ForeignKey("User")]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }

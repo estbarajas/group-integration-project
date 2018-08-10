@@ -44,6 +44,6 @@ namespace PizzaDelivery.Models
 
         public DbSet<TextAPI> TextAPIs { get; set; }
 
-        public System.Data.Entity.DbSet<PizzaDelivery.Models.StripeAPI> StripeAPIs { get; set; }
+        public DbSet<PizzaDelivery.Models.StripeAPI> StripeAPIs { get; set; }
     }
 }

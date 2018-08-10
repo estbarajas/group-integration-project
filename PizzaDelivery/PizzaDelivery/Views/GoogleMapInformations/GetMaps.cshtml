@@ -1,8 +1,10 @@
-﻿@model PizzaDelivery.Models.GoogleMapInformation
+﻿@*@model PizzaDelivery.Models.GoogleMapInformation*@
 
 @{
     ViewBag.Title = "GetMaps";
 }
+
+
 
 <h2>GetMaps</h2>
 
@@ -63,15 +65,23 @@
 
 <body>
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
+    <br /><br /><br /><br /><br /><br /><br />
     
+    @*<form>
+        Enter your email address:
+        <input type="text" id="Email" />
+        <input type="submit" value="Submit">
+    </form>*@
+
     <div id="output"></div>
     <div id="map"></div>
     <script>
+        var customerInput = @Html.Raw(ViewBag.FullAddress);
         function initMap() {
+            debugger;
             var bounds = new google.maps.LatLngBounds;
             var markersArray = [];
-            var customerInput = '@(ViewBag.ToAdress)';
+            
             var origin1 = '333 N Plankinton Ave, Milwaukee, WI, USA';
             var destinationA = customerInput;
             console.log(customerInput);
@@ -140,7 +150,7 @@
                                 success: function (html) {
                                     alert(results.duration_in_traffic.text);
                                 },
-                            });                            
+                            });
                             geocoder.geocode({ 'address': originList[i] },
                                 showGeocodedAddressOnMap(false));
                             for (var j = 0; j < results.length; j++) {

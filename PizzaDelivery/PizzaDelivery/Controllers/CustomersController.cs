@@ -57,13 +57,15 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber,Email")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 customer.UserId = User.Identity.GetUserId();
                 db.Customers.Add(customer);
                 db.SaveChanges();
+                var customerFullAddress = customer.Address + ", " + customer.City + ", " + customer.State + ", " + customer.Zipcode.ToString();
+                ViewBag.ToAddress = customerFullAddress;
                 return RedirectToAction("Login", "Account");
             }
 
@@ -93,7 +95,7 @@ namespace PizzaDelivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,City,State,Zipcode,EmailNotification,TextNotification,OrderId,PhoneNumber,Email")] Customer customer)
         {
             if (ModelState.IsValid)
             {

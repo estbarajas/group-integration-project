@@ -39,25 +39,9 @@
             <td>
                 @Html.ActionLink("Remove", "Delete", new { id = item.Id })
             </td>
-            @*<td>
-                    @Html.TextBoxFor(modelItem => item.FutureDeliveryTime)
-                    <input type="submit" value="Generate report" />
-                </td>*@
         </tr>
-
     }
-
-
 </table>
-
-
-
-@*@using (Html.BeginForm("FormTwo", "OrderItems", FormMethod.Post))
-    {
-        @Html.TextBoxFor(model => model.Select(f => f.FutureDeliveryTime));
-        @Html.ValidationMessageFor(model => model.Select(f => f.FutureDeliveryTime))
-        <input type="submit" value="sub" />
-    }*@
 
 <h6>Enter your desired delivery time:</h6>
 @using (Html.BeginForm("UpdateDeliveryTime", "OrderItems"))
@@ -66,10 +50,6 @@
     <input id="Text1" type="text" name="txtOne" />
     <input id="Button1" type="submit" value="Submit" />
 }
-
-
-
-
 
 @using (Html.BeginForm())
 {

@@ -15,33 +15,34 @@ namespace PizzaDelivery.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        //public ActionResult GetMaps()
-        //{
+        public ActionResult GetMaps()
+        {
 
-        //    return View();
-        //}
+            return View();
+        }
 
         [HttpPost]
-        public ActionResult GetMaps(/*string customerDurationResults, string customerDistanceResults, string customerInput*/)
-        {
+        public ActionResult GetMaps(string customerDurationResults, string customerDistanceResults, string customerInput)
+        {           
             var userId = User.Identity.GetUserId();
             var customer = db.Customers.Where(c => c.UserId == userId).Select(c => c).First();
-            var customerAddress = customer.Address + ", " + customer.City + ", " + customer.State + ", " + customer.Zipcode.ToString();
-            ViewBag.ToAdress = customerAddress;
-            GoogleMapInformation googleMapInformation = new GoogleMapInformation();
-            db.GoogleMapInformations.Add(googleMapInformation);
+            var customerFullAddress = customer.Address + ", " + customer.City + ", " + customer.State + ", " + customer.Zipcode.ToString();
+            ViewBag.FullAddress = customerFullAddress;
 
-            googleMapInformation.RouteTime = "5 mins";
-            googleMapInformation.RouteDistance = "40 miles";
-            googleMapInformation.CustomerAddress = customerAddress;
-            var thisGoogle = db.GoogleMapInformations.Where(g => g.ID == 11).FirstOrDefault();
 
-            ViewBag.Time = thisGoogle.RouteTime;
-            ViewBag.Distance = googleMapInformation.RouteDistance;
-            ViewBag.Address = googleMapInformation.CustomerAddress;
+            GoogleMapInformation google = new GoogleMapInformation();
+            google.RouteTime = customerDurationResults;
+            google.RouteDistance = customerDistanceResults;
+            google.CustomerAddress = customerFullAddress;
+            db.GoogleMapInformations.Add(google);
+
+            ViewBag.Time = google.RouteTime;
+            ViewBag.Distance = google.RouteDistance;
+            ViewBag.FullAddress = customerFullAddress;
 
             db.SaveChanges();
-            return RedirectToAction("Progress", "OrderItems");
+            //return RedirectToAction("Progress", "OrderItems");
+            return View();
         }
 
     }

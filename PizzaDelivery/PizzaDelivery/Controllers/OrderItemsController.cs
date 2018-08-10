@@ -25,24 +25,6 @@ namespace PizzaDelivery.Controllers
 
         public ActionResult SingleIndex(string searchString, string FutureDelivery)
         {
-
-            //var orderItem = db.OrderItems.Where(o => o.OrderId == order.Id);
-            //var total = 0;
-            //foreach (var item in orderItem)
-            //{
-            //    total = total + item.Item.Price;
-            //}
-            //order.Total = total;
-
-            //Employee employee = new Employee();
-
-            //var orderItemList = from s in db.OrderItems
-            //                   select s;
-
-            //string userId = User.Identity.GetUserId();
-            //var customerInfo = db.Customers.Where(c => c.UserId.Equals(userId)).Single();
-            //int? orderId = customerInfo.OrderId;
-            //orderItemList = orderItemList.Include(o=>o.Item).Include(o=>o.Order).Where(s => s.OrderId == orderId);
             var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
 
             var userId = User.Identity.GetUserId();
@@ -64,7 +46,7 @@ namespace PizzaDelivery.Controllers
 
             var coupons = from s in db.Coupons
                           select s;
-            if (!String.IsNullOrEmpty(searchString)) //use this for day and bottom code run all time for zipcode
+            if (!String.IsNullOrEmpty(searchString))
             {
                 var coupon = coupons.Where(s => s.Name.Contains(searchString)).Select(v => v.Value).First();
                 ViewBag.TotalAmount = total - coupon;
@@ -82,13 +64,13 @@ namespace PizzaDelivery.Controllers
   
 
         [HttpPost]
-        public ActionResult UpdateDeliveryTime()
+        public ActionResult UpdateDeliveryTime(Order order)
         {
             var thisUserId = User.Identity.GetUserId();
             var currentCustomer = db.Customers.Where(c => c.UserId == thisUserId).FirstOrDefault();
 
             string textboxValue = Request.Form["txtOne"];
-            var latestOrderItem = db.OrderItems.OrderByDescending(c => c.Id == 53).First();
+            var latestOrderItem = db.OrderItems.OrderByDescending(c => c.Id == order.Id).First();
             latestOrderItem.FutureDeliveryTime = textboxValue;
             db.SaveChanges();
 
@@ -98,15 +80,18 @@ namespace PizzaDelivery.Controllers
         }
 
 
-        public ActionResult Progress()
+        public ActionResult Progress(GoogleMapInformation googleMap)
         {
+            GoogleMapInformationsController googleControl = new GoogleMapInformationsController();
+            googleControl.GetMaps(googleControl);
+            string customerRoute = googleMap.RouteTime;
+            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
             var userId = User.Identity.GetUserId();
             TextAPIsController text = new TextAPIsController();
-            text.SendText(userId);
+            text.SendText(userId, latestOrder, googleMap);
             EmailAPIsController email = new EmailAPIsController();
-            email.SendEmail(userId);
-
-            var latestOrder = db.Orders.OrderByDescending(c => c.Id).FirstOrDefault();
+            email.SendEmail(userId, latestOrder, googleMap);
+            
             userId = User.Identity.GetUserId();
             var customerName = db.Customers.Where(c => c.UserId == userId).Select(c => c).First();
             var orderItem = db.OrderItems.Include(o => o.Item).Include(o => o.Order).Where(o => o.OrderId == latestOrder.Id).ToList();
@@ -181,9 +166,6 @@ namespace PizzaDelivery.Controllers
         [HttpPost]
         public ActionResult Purchase(Order order)
         {
-
-            //db.Orders.Add(order);
-            //db.SaveChanges();
             return RedirectToAction("Progress");
         }
 
